@@ -1,7 +1,8 @@
 /**
  * Spotify
  *
- * Embeds a spotify playlist
+ * Adds a spotify button to the bottom menu bar and shows the given playlist
+ * inside the accordion.
  *
  * All information regarding plugin development can be found at
  * https://dev.spatialweb.net/plugins/plugins/
