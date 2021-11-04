@@ -1,0 +1,27 @@
+{
+  "name": "sw-plugins",
+  "version": "1.0.0",
+  "description": "External plugins that can be used inside the SpatialWeb platform",
+  "private": true,
+  "scripts": {
+    "test": "standard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VatomInc/sw-plugins.git"
+  },
+  "keywords": [
+    "plugin",
+    "plugins",
+    "SpatialWeb"
+  ],
+  "author": "Vatom Inc.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/VatomInc/sw-plugins/issues"
+  },
+  "homepage": "https://github.com/VatomInc/sw-plugins#readme",
+  "devDependencies": {
+    "standard": "^16.0.4"
+  }
+}
