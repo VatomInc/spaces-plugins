@@ -15,7 +15,7 @@ module.exports = class Spotify extends BasePlugin {
     /** Plugin info */
     static get id()             { return 'vatominc-spotify' }
     static get name()           { return 'Spotify Playlist' }
-    static get description()    { return 'Display a message, in a popup, to users when they enter the space.' }
+    static get description()    { return 'Allows you to open a spotify playlist inside the space.' }
 
     /** Called when the plugin is loaded */
     onLoad() {
