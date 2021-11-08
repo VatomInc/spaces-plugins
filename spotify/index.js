@@ -48,4 +48,32 @@ module.exports = class Spotify extends BasePlugin {
 
     }
 
+    /**
+     * Updates the plugin when the settings have changed.
+     * @param {string} field Field that has been updated.
+     * @param {any} value New value of the field.
+     */
+    onSettingsUpdated(field, value) {
+
+        // Ignore any update that is not a URL change
+        if (field !== 'url') {
+            return
+        }
+
+        // Re-register the button when settings have changed
+        this.menus.register({
+            id: 'vatominc-spotify-button',
+            icon: this.paths.absolute('./spotify.svg'),
+            text: 'Spotify',
+            section: 'controls',
+            order: 3,
+            inAccordion: true,
+            panel: {
+                iframeURL: value || 'https://open.spotify.com/embed/playlist/0vC2B4CRTQfTu899Jh0Cxf',
+                width: 320
+            }
+        })
+
+    }
+
 }
