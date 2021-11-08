@@ -27,7 +27,7 @@ module.exports = class Spotify extends BasePlugin {
             panel: {
                 fields: [
                     { type: 'section', name: 'Spotify Playlist' },
-                    { type: 'text', id: 'url', name: 'URL', help: 'Embed URL for the Spotify playlist.' }
+                    { type: 'textarea', id: 'url', name: 'URL', help: 'Embed URL for the Spotify playlist.' }
                 ]
             }
         })
