@@ -1,4 +1,4 @@
-# Physics :rocket
+# Physics :rocket:
 
 This plugin allows objects in the space to have physics, so they can be moved around by,
 and collide with, users.
