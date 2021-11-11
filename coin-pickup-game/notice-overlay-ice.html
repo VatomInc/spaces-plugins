@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@900&display=swap" rel="stylesheet">
+
+    <title>Notice</title>
+</head>
+<body>
+    <!-- Styling -->
+    <style>
+        html,
+        head {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        div#total {
+            color: #084E9D;
+            font-family: 'Inter', Arial;
+            font-weight: 900;
+            -webkit-text-stroke: 1px #FFFFFF;
+            text-stroke: 1px #FFFFFF;
+            text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+        }
+
+        img.sparkle {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            transform: translate(0px, 0px), scale(0);
+            transition: transform 2s linear;
+        }
+    </style>
+
+    <!-- Coin cointer -->
+    <div style="height: 79px; ">
+        <div style="position: absolute; top: 0px; right: 0px; width: 190px; height: 79px; background: url(ice-coins-bg.png) center/190px 79px;" onclick="parent.postMessage({ action: 'coin-alert-ice' }, '*')">
+            <div id='scoreContainer' style="position: absolute; top: 18px; right: 20px; width: 100px; height: 38px; z-index: 2; display: flex; align-items: center; justify-content: center;">
+                <div id='total' style="text-align: right; margin-top: 2px; font-size: 16px; position: absolute; right: 0px;">
+                    <img src='./450.png' style="width: 34px;" />
+                </div>
+
+                <div style="width: 50px; left: -12px; height: 6px; background-color:white; border-radius: 3px; overflow: hidden; position: relative;">
+                    <div id="progressBarDiv" style="position: absolute; top: 0; left: 0; height: 100%; background-color: #0074CC; transition: width 0.2s;"></div>
+                </div>
+
+                <div id='score' style="text-align: center; font-size: 11px; top: 22px; left: 28px; position: absolute; font-family: 'Inter', Arial; color: white;">
+                    ?
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Code -->
+    <script>
+
+        // Called on load
+        document.addEventListener('DOMContentLoaded', function () {
+
+            // Start showing sparkles
+            setInterval(showSparkle, 1000)
+
+        })
+
+        // Called when a message is received from the plugin
+        window.addEventListener('message', function (e) {
+
+            // Show score change
+            if (e.data.action == 'set-score') {
+                document.getElementById('score').innerText = e.data.score
+
+                let width = (e.data.score / 450 * 100)
+                document.getElementById('progressBarDiv').style.width = width + "%"
+            }
+
+        })
+
+        // On load, ask the plugin to send us all it's messages
+        parent.postMessage({ action: 'panel-load' }, '*')
+
+        let imgCache = []
+
+        // Show a sparkle
+        async function showSparkle() {
+
+            // Pick a side
+            const rect = document.getElementById('scoreContainer').getBoundingClientRect()
+            const startX = Math.floor(rect.left + Math.random() * (rect.width - 10))
+            const startY = Math.floor(rect.top + rect.height / 2 - 10)
+            const endX = Math.floor(startX + Math.random() * 20 - 10)
+            const endY = Math.floor(rect.top + rect.height / 2 + 20)
+
+            if (Math.random() > 0.5) {
+                endY = Math.floor(rect.top - 20)
+            }
+
+            // Get a sparkle from the cache
+            let img = imgCache.pop()
+
+            if (img) {
+                // Reset it's position
+                img.style.transform = "translate(" + startX + "px, " + startY + "px) scale(0)"
+                await new Promise(c => setTimeout(c, 2000))
+            } else {
+                // Create it
+                img = new Image()
+                img.src = 'ice-sparkle.svg'
+                img.className = 'sparkle'
+                img.style.transform = "translate(" + startX + "px, " + startY + "px) scale(0)"
+                document.body.appendChild(img)
+                await new Promise(c => setTimeout(c, 100))
+            }
+
+            // Animate to halfway position
+            img.style.transform = "translate(" + (startX + (endX - startX) / 2) + "px, " + (startY + (endY - startY) / 2) + "px) scale(1)"
+            await new Promise(c => setTimeout(c, 2000))
+
+            // Animate to end
+            img.style.transform = "translate(" + endX + "px, " + endY + "px) scale(0)"
+            await new Promise(c => setTimeout(c, 2000))
+
+            // Put this image back in the pool
+            imgCache.push(img)
+
+        }
+
+    </script>
+
+</body>
+</html>
