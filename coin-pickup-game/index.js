@@ -20,13 +20,6 @@ const Themes = [
         id: 'default',
         name: 'Golden Coins',
         scorePage: 'notice-overlay.html'
-    },
-
-    // Ice theme
-    {
-        id: 'ice',
-        name: 'Ice Gems',
-        scorePage: 'notice-overlay-ice.html'
     }
 ]
 
@@ -146,23 +139,15 @@ module.exports = class CoinPickupGame extends BasePlugin {
 
         // Update score now if panel loaded
         if (data.action === 'panel-load') {
-            return this.updateScore()
+            this.updateScore()
+            this.updateImages()
+            return
         }
 
         // Show coin message alert
         if (data.action == 'coin-alert') {
-            return this.menus.alert(null, 'Find the hidden coins in this space to increase your score!')
-        }
-
-        // Show coin message alert for ice theme
-        if (data.action == 'coin-alert-ice') {
-            const gain = this.getField('score') || 10
-            const pointStr = Math.abs(gain) > 1 ? 's' : ''
-
-            return this.menus.alert(
-                null,
-                `Capture the cold blue gems and gain ${gain} point${pointStr}. Avoid the hot flames - they take ${gain} point${pointStr} away from your score. Keep on playing up to ${this.getField('maximum-score') || 450} points!`
-            )
+            this.menus.alert(null, 'Find the hidden coins in this space to increase your score!')
+            return
         }
 
     }
@@ -172,6 +157,14 @@ module.exports = class CoinPickupGame extends BasePlugin {
 
         // Send score to panel
         this.menus.postMessage({ action: 'set-score', score: this.score })
+
+    }
+
+    /** Updates the `src` attribute of the relevant images */
+    updateImages() {
+
+        // Images inside the HTML files would not load, so we load them here
+        this.menus.postMessage({ action: 'update-coin-img', src: this.paths.absolute('coin.gif') })
 
     }
 
