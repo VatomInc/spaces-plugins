@@ -10,8 +10,6 @@
  * @author Vatom Inc.
  */
 
-importScripts(this.paths.absolute('./cannon.min.js'))
-
 /** Determines the interval of state transfer over the network, in milliseconds */
 const StateTransferInterval = 100
 
@@ -33,6 +31,9 @@ module.exports = class Physics extends BasePlugin {
 
     /** Called when the plugin is loaded */
     onLoad() {
+
+        // Import physics engine
+        importScripts(this.paths.absolute('./cannon.min.js'))
 
         // Generate an ID to represent this session
         this.sessionID = Math.random().toString(36).substr(2)
