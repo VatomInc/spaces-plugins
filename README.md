@@ -12,6 +12,9 @@ If you would like to know more about developing your own plugins, you can visit
 the "[Creating Plugins](https://dev.spatialweb.net/plugins/plugins/)"
 guide on the developer portal.
 
+**NB**: When making a pull request into this repo to add a plugin, you are accepting
+that your plugin will be under an [MIT license](https://choosealicense.com/licenses/mit/).
+
 ## Examples :open_file_folder:
 
 Below is a list of all the current examples and where to find each of them.
@@ -24,4 +27,4 @@ Below is a list of all the current examples and where to find each of them.
 | Portal | Allows users to teleport to different areas (within a space) using a portal | [Here](./portal) | <div style="display: flex;align-items: center;"><img src='https://user-images.githubusercontent.com/43512442/141286990-c74cc05f-d84a-4c3b-8b8a-2f50520186d0.png' style="margin-right: 8px;">Vatom Inc.</div> |
 | Spotify | Adds a spotify button to the bottom menu bar | [Here](./spotify) | <div style="display: flex;align-items: center;"><img src='https://user-images.githubusercontent.com/43512442/141286990-c74cc05f-d84a-4c3b-8b8a-2f50520186d0.png' style="margin-right: 8px;">Vatom Inc.</div> |
 | Webpack | Demonstrates how webpack can be used to import various packages | [Here](./webpack) | <div style="display: flex;align-items: center;"><img src='https://user-images.githubusercontent.com/43512442/141286990-c74cc05f-d84a-4c3b-8b8a-2f50520186d0.png' style="margin-right: 8px;">Vatom Inc.</div> |
-| Gun | A game where users can add a gun to an accessory slot and shoot in the space. | [Here](./gun) | <div style="display: flex;align-items: center;"><img src='https://user-images.githubusercontent.com/43512442/141286990-c74cc05f-d84a-4c3b-8b8a-2f50520186d0.png' style="margin-right: 8px;">Vatom Inc.</div> |
+| Gun | Allows users to shoot a shotgun when in First Person view | [Here](./gun) | <div style="display: flex;align-items: center;"><img src='https://avatars.githubusercontent.com/u/12592523?v=4' style="margin-right: 8px; width: 26px; height: 26px; border-radius: 15px;"><a href="https://github.com/FrancoBolevin" sty>FrancoBolevin</a></div> |
