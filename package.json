@@ -1,6 +1,6 @@
 {
   "name": "sw-plugins",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Various examples of plugins that can be imported into any space",
   "private": true,
   "scripts": {
