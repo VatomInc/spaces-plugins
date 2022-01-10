@@ -52,7 +52,6 @@ module.exports = class TextNotificationPlugin extends BasePlugin {
         else{
             this.menus.alert('Please renter the number with the correct format eg. +11234567890', 'Invalid international number', 'info')
         }
-        //reregister the button when the settings have changed
     }
 
     /** Called when the user presses the Notify button */
@@ -80,18 +79,6 @@ module.exports = class TextNotificationPlugin extends BasePlugin {
             this.menus.alert('The space hosts do not wish to be notified at this moment','Notification not sent', 'info')
         }
 
-    }
-
-    /** Called when a message is received */
-    async onMessage(msg, fromUserID) {
-        // Check message type
-        console.log("On Message")
-
-    }
-
-    /** Called when we receive a message to display text */
-    onShowMessage(msg, fromUserID) {
-        console.log("On Show Message")
     }
 
 }
