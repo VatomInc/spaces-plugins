@@ -5,7 +5,7 @@ module.exports = class TextNotificationPlugin extends BasePlugin {
     static get name()           { return 'Text Notification' }
     static get description()    { return 'This plugin allows users to notify space hosts via text of their arival in the space' }
 
-    phoneNumberSet = new Set()
+    phoneNumberMap = new Map()
     userName = ''
     /** Called when the plugin is loaded */
     onLoad() {
@@ -42,13 +42,13 @@ module.exports = class TextNotificationPlugin extends BasePlugin {
     }
     /**
      * Updates the plugin when settings have changed
-     * @param {} feild that has been updated
+     * @param {any} feild that has been updated
      * @param {any} value new value of the feild
      */
     onSettingsUpdated(feild, value){
-        //check that the number is of the correct format then add to set
+        //check that the number is of the correct format then add to the map
         if(value.match(/^\+[1-9]\d{1,14}$/)){
-            this.phoneNumberSet.add(value)
+            this.phoneNumberMap.set(feild, value)
         }
         else{
             this.menus.alert('Please renter the number with the correct format eg. +11234567890', 'Invalid international number', 'info')
@@ -58,8 +58,8 @@ module.exports = class TextNotificationPlugin extends BasePlugin {
     /** Called when the user presses the Notify button */
     async onMenuPress() {
         // Ask user for message
-        if(this.phoneNumberSet.size > 0){
-            this.phoneNumberSet.forEach( (number) => {
+        if(this.phoneNumberMap.size > 0){
+            this.phoneNumberMap.forEach( (number, feild) => {
                 let dataToSend = this.userName + ':' + number       //message body format: "userName:number"
                 fetch('https://us-central1-ydangle-high-fidelity-test-2.cloudfunctions.net/sendSMSNotification',{
                     method: 'POST',
