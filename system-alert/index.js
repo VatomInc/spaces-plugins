@@ -32,9 +32,15 @@ module.exports = class SystemAlertPlugin extends BasePlugin {
     async onMenuPress() {
 
         // Ask user for message
-        let msg = await this.menus.prompt("Enter a message. This message will be displayed to everyone in the space currently.", "", "Message Everyone")
-        if (!msg)
+        const msg = await this.menus.prompt({
+            title: 'Message Everyone',
+            text: 'Enter a message. This message will be displayed to everyone in the space currently.'
+        })
+
+        // No message to send
+        if (!msg) {
             return
+        }
 
         // Send message
         this.messages.send({ action: 'show-msg', text: msg }, true)
