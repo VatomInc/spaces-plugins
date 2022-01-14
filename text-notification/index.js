@@ -1,22 +1,27 @@
+/**
+ * Text Notification
+ *
+ * Sends a text notification to the hosts of a space when a new user arrives.
+ *
+ * @license MIT
+ * @author zmaqutu
+ */
 module.exports = class TextNotificationPlugin extends BasePlugin {
 
     /** Plugin info */
     static get id()             { return 'zongo.text-notify' }
     static get name()           { return 'Text Notification' }
-    static get description()    { return 'This plugin allows users to notify space hosts via text of their arival in the space' }
+    static get description()    { return 'Notifies space hosts via text when a new user arrives in their space.' }
 
     phoneNumberMap = new Map()
     userName = ''
+
     /** Called when the plugin is loaded */
-    onLoad() {
-        this.user.getDisplayName().then(userID => {
-            this.userName = userID
-        }).catch(err => {
-            console.log(err + 'userName is not defined')
-        })
+    async onLoad() {
         // Register button
         this.menus.register({
-            text: "Notify",
+            id: 'zongo.text-notify',
+            text: 'Notify',
             section: 'controls',
             adminOnly: false,
             order: 11,
@@ -24,44 +29,75 @@ module.exports = class TextNotificationPlugin extends BasePlugin {
             action: this.onMenuPress.bind(this)
         })
 
+        // Register settings
         this.menus.register({
-            id: 'notify-config',
+            id: 'zongo.text-notify-config',
             section: 'plugin-settings',
             panel: {
                 fields: [
                     { type: 'section', name: 'Phone Numbers' },
-                    { type: 'text', id: 'phone-number1', name: 'Phone Number', help: 'Enter the phone number you wish to be alerted when a user joins the space. Example Format: +15555555555' },
-                    { type: 'text', id: 'phone-number2', name: 'Phone Number', help: 'Enter the phone number you wish to be alerted when a user joins the space. Example Format: +15555555555' },
-                    { type: 'text', id: 'phone-number3', name: 'Phone Number', help: 'Enter the phone number you wish to be alerted when a user joins the space. Example Format: +15555555555' },
-                    { type: 'text', id: 'phone-number4', name: 'Phone Number', help: 'Enter the phone number you wish to be alerted when a user joins the space. Example Format: +15555555555' },
-                    { type: 'text', id: 'phone-number5', name: 'Phone Number', help: 'Enter the phone number you wish to be alerted when a user joins the space. Example Format: +15555555555' },
+                    { type: 'text', id: 'phone-number1', name: 'Phone Number', help: 'Enter the phone number you would like to be notified on when a user joins the space.<br/>For example: +1 415 555 2671' },
+                    { type: 'text', id: 'phone-number2', name: 'Phone Number', help: 'Enter the phone number you would like to be notified on when a user joins the space.<br/>For example: +1 415 555 2671' },
+                    { type: 'text', id: 'phone-number3', name: 'Phone Number', help: 'Enter the phone number you would like to be notified on when a user joins the space.<br/>For example: +1 415 555 2671' },
+                    { type: 'text', id: 'phone-number4', name: 'Phone Number', help: 'Enter the phone number you would like to be notified on when a user joins the space.<br/>For example: +1 415 555 2671' },
+                    { type: 'text', id: 'phone-number5', name: 'Phone Number', help: 'Enter the phone number you would like to be notified on when a user joins the space.<br/>For example: +1 415 555 2671' }
                 ]
             }
         })
 
-    }
-    /**
-     * Updates the plugin when settings have changed
-     * @param {any} feild that has been updated
-     * @param {any} value new value of the feild
-     */
-    onSettingsUpdated(feild, value){
-        //check that the number is of the correct format then add to the map
-        if(value.match(/^\+[1-9]\d{1,14}$/)){
-            this.phoneNumberMap.set(feild, value)
+        // Fetch user display name
+        try {
+            this.userName = await this.user.getDisplayName()
+        } catch (err) {
+            console.error('[TextNotification] Unable to fetch username', err)
         }
-        else{
-            this.menus.alert('Please renter the number with the correct format eg. +11234567890', 'Invalid international number', 'info')
+    }
+
+    /**
+     * Updates the plugin when settings have changed.
+     * @param {string} field Field that has been updated.
+     * @param {string} value New value of the field.
+     */
+    onSettingsUpdated(field, value) {
+        value = value.trim()
+
+        // Clear phone number if user wishes to do so
+        if (value.length < 1) {
+            this.phoneNumberMap.delete(field)
+            return
+        }
+
+        // Remove any additional spaces or dashes
+        value = value.replace(/(\s|-)/g, '')
+
+        // Check that the number is of the correct format then add to the map
+        if (value.match(/^\+[1-9]\d{1,14}$/)) {
+            this.phoneNumberMap.set(field, value)
+        } else {
+            this.menus.alert('Please re-enter the number with the correct format. For example: +14155552671 or +1 415 555 2671', 'Invalid international number', 'error')
         }
     }
 
     /** Called when the user presses the Notify button */
     async onMenuPress() {
-        // Ask user for message
-        if(this.phoneNumberMap.size > 0){
-            this.phoneNumberMap.forEach( (number, feild) => {
-                let dataToSend = this.userName + ':' + number       //message body format: "userName:number"
-                fetch('https://us-central1-ydangle-high-fidelity-test-2.cloudfunctions.net/sendSMSNotification',{
+        // No numbers to send text to
+        if (this.phoneNumberMap.size < 1) {
+            this.menus.alert('Space hosts do not wish to be notified at this moment', 'Notification not sent', 'info')
+            return
+        }
+
+        // Send message to each number
+        for (let number of this.phoneNumberMap.values()) {
+            // No associated number, so skip
+            if (!number) {
+                continue
+            }
+
+            // Send data in format "userName:number"
+            const dataToSend = this.userName + ':' + number
+
+            try {
+                fetch('https://us-central1-ydangle-high-fidelity-test-2.cloudfunctions.net/sendSMSNotification', {
                     method: 'POST',
                     mode: 'no-cors',
                     headers: {
@@ -69,18 +105,12 @@ module.exports = class TextNotificationPlugin extends BasePlugin {
                     },
                     body: dataToSend,
                 })
-                .then(() =>{
-                    console.log('success message sent')
-                })
-                .catch(error => console.log('ERROR', error))
-            })
-            this.menus.alert('The hosts have been notified of your arrival','Notification sent', 'success')
-        }
-        else{
-            this.menus.alert('The space hosts do not wish to be notified at this moment','Notification not sent', 'info')
+            } catch (err) {
+                console.error(`[TextNotification] Message to number "${number}" not sent`, err)
+            }
         }
 
+        this.menus.alert('Space hosts have been notified of your arrival', 'Notification sent', 'success')
     }
 
 }
-
