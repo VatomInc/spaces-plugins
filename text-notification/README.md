@@ -1,4 +1,4 @@
-# SMS Notification Plugin
+# Text Notification Plugin
 
 This plugin allows users to notify space hosts of their arrival to the space via SMS
 
@@ -10,21 +10,23 @@ This plugin allows users to notify space hosts of their arrival to the space via
   - Once it has been uploaded, click on the `index.js` file and select "Copy URL"
 - **Step 2:** Add the plugin to your space by clicking "Plugins" and scrolling to the bottom to click the "Add from URL" button. Paste the URL to the plugin here.
 
-## Plugin Configuration :clipboard:
+## Configuration :gear:
 
-- **Step 1:** Once the plugin has been installed in your space, you can add up to five phone numbers you wish to be alerted when a user enters the space.
-    - Click on Plugins
-    - Navigate to the 'Notify Hosts' plugin and click on Settings
-    - Add the five phone numbers you wish to notify using the [E.164 format](https://www.twilio.com/docs/glossary/what-e164)
+Once the plugin has been installed in your space, you can add up to five phone numbers you wish to be alerted when a user enters the space.
 
-    ```
-    [+][country code][area code][local phone number]
-    ```
-- Here are some examples of phone numbers in [E.164 format](https://www.twilio.com/docs/glossary/what-e164)
+To add the numbers, do the following:
+- Click "Plugins" in the top bar
+- Find the "Text Notification" plugin and click the "Settings" button
+- Add the phone numbers you wish to notify by using the [E.164 format](https://www.twilio.com/docs/glossary/what-e164)
 
-    | Country       | Local phon    | Country Code | E.164 formatted number  |
-    | ------------- |:-------------:| ------------:|------------------------:|
-    | United States | 415 123 1234  | +1           | +14151231234            |
-    | South Africa  | 074 123 1234  | +27          | +27741231234            |
-    | United Kingdom| 020 1234 1234 | +44          | +442012341234           |
+```
+[+][country code][area code][local phone number]
+```
 
+Here are some examples of phone numbers in [E.164 format](https://www.twilio.com/docs/glossary/what-e164)
+
+| Country        | Country Code | Area Code | Local Phone Number | E.164 Format  |
+| -------------- | -----------: | :-------: | :----------------- | :-----------: |
+| United States  | +1           | 415       | 123 1234           | +14151231234  |
+| South Africa   | +27          | 074       | 123 1234           | +27741231234  |
+| United Kingdom | +44          | 020       | 1234 1234          | +442012341234 |
