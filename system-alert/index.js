@@ -18,6 +18,7 @@ module.exports = class SystemAlertPlugin extends BasePlugin {
 
         // Register button
         this.menus.register({
+            id: 'jjv360.system-alert',
             text: 'Alert',
             section: 'admin-panel',
             adminOnly: true,
