@@ -1,4 +1,4 @@
-# Text Notification Plugin
+# Text Notification :iphone:
 
 This plugin allows users to notify space hosts of their arrival to the space via SMS
 

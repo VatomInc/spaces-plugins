@@ -1,7 +1,7 @@
 <div>
   <h1 align="center">
-    <img src="https://user-images.githubusercontent.com/43512442/113841657-3aa76380-9792-11eb-97ae-abf706c38169.png" width="30" height="30" alt="Logo"></img>
-    SpatialWeb Example Plugins
+    <img src="./logo.svg" alt="Logo" style="height: 38px;"></img>
+    Spaces Example Plugins
   </h1>
 </div>
 
@@ -9,7 +9,7 @@ This repository serves as a place where you can see examples of various plugins,
 ranging from adding your Spotify playlist into your space to a coin pickup game :moneybag:
 
 If you would like to know more about developing your own plugins, you can visit
-the "[Creating Plugins](https://dev.spatialweb.net/plugins/plugins/)"
+the "[Creating Plugins](https://developer.vatom.com/plugins/plugins/)"
 guide on the developer portal.
 
 **NB**: When making a pull request into this repo to add a plugin, you are accepting
