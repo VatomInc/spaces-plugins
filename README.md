@@ -1,12 +1,11 @@
 <div>
   <h1 align="center">
-    <img src="./logo.svg" alt="Logo" style="height: 38px;"></img>
+    <img src="./logo.svg" alt="Logo" height="38"></img>
     Spaces Example Plugins
   </h1>
 </div>
 
-This repository serves as a place where you can see examples of various plugins,
-ranging from adding your Spotify playlist into your space to a coin pickup game :moneybag:
+Examples of plugins that can be imported into your own <a href="https://spaces.vatom.com"><img src="./logo.svg" alt="Logo" height="14"></img> Space</a> 
 
 If you would like to know more about developing your own plugins, you can visit
 the "[Creating Plugins](https://developer.vatom.com/plugins/plugins/)"
