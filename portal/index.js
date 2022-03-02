@@ -28,6 +28,9 @@ module.exports = class PortalPlugin extends BasePlugin {
     /** Portal that we are currently inside */
     currentlyInsidePortal = null
 
+    /** Timer to keep track of your last portal time */
+    portalTimer = null
+
     /** Called when the plugin is loaded */
     onLoad() {
 
@@ -111,10 +114,10 @@ module.exports = class PortalPlugin extends BasePlugin {
 
         }
 
-        // Stop if the portal we are in is the same as the last activated one.
+        // Stop if the portal we are in is the same as the last activated one or if it has been less than 2 seconds since our last portal.
         // This is to correctly recover from errors and to ensure the user
         // does not continue to bounce between portals the whole time
-        if (this.currentlyInsidePortal == activatePortal) {
+        if (this.currentlyInsidePortal == activatePortal || this.portalTimer + 2000 >= Date.now()) {
             return
         }
 
@@ -126,6 +129,7 @@ module.exports = class PortalPlugin extends BasePlugin {
         }
 
         // Activate portal
+        this.portalTimer = Date.now()
         await activatePortal.activate()
 
     }
@@ -221,6 +225,7 @@ class PortalComponent extends BaseComponent {
 
         // Move avatar to the position of the target
         console.debug(`[Portals] Portal activated, going from "${this.fields.name || this.fields.id}" to "${targetPortal.fields.name || targetPortal.fields.id}"`)
+
         await this.plugin.user.setPosition(targetPortal.fields.x || 0, 0, targetPortal.fields.y || 0)
 
         // Set target portal as the last activated portal, so that we do not trigger it by accident
