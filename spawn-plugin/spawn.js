@@ -55,6 +55,20 @@ class SpawnComponent extends BaseComponent {
             this.plugin.menus.alert('Object clicked!')
     
         }
+
+        /** Called when your component is about to be removed */
+        onUnload() {
+                        
+                console.log('Unloaded component!')
+        
+        }
+
+        /** Called when an editable field inside the component has changed. */
+        onObjectUpdated(newFields) {
+    
+                console.log('Object updated!')
+    
+        }
     
     }
     
