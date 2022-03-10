@@ -27,7 +27,7 @@
                         description: 'Moves this object to a random position in the world.',
                 })
                 
-                this.hooks.addHandler('user-died', this.spawnToRandomPosition)
+                this.hooks.addHandler('fpshud.death', this.spawnToRandomPosition)
     
         }
 
@@ -45,16 +45,17 @@
 
         spawnToRandomPosition = async () => { 
                 console.log('spawn hook triggered')
+                console.log(this.spawnObjectIDs)
                 
                 //get random spawn disc
                 let randomObjectID = this.spawnObjectIDs[Math.floor(Math.random() * this.spawnObjectIDs.length)]
                 
-                // get position of random spawn disc
-                let objectProperties = this.objects.get(randomObjectID)
+                // wait for the position of random spawn disc
+                let objectProperties = await this.objects.get(randomObjectID)
 
                 
                 //move user to said position
-                await this.plugin.user.setPosition(objectProperties.x, objectProperties.height, objectProperties.z) 
+                this.user.setPosition(objectProperties.x, objectProperties.height, objectProperties.z) 
         }
     
 }
@@ -62,10 +63,6 @@ class SpawnComponent extends BaseComponent {
 
         /** Called when an object with this component is loaded */
         onLoad() {
-    
-        //     console.log('Loaded component!')
-        //     console.log(this.objectID)
-        //     console.log(this.plugin)
             this.plugin.spawnObjectIDs.push(this.objectID)
     
         }
@@ -86,7 +83,6 @@ class SpawnComponent extends BaseComponent {
 
         /** Called when an editable field inside the component has changed. */
         onObjectUpdated(newFields) {
-    
                 console.log('Object updated!')
     
         }
