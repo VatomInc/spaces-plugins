@@ -19,6 +19,12 @@ module.exports = class SpawnPlugin extends BasePlugin {
         onLoad() {
     
                 this.menus.alert('Hello World!')
+                // Register component
+                this.objects.registerComponent(SpawnComponent, {
+                id: 'spawn',
+                name: 'Spawn Avatar',
+                description: 'Moves this object to a random position in the world.',
+            })
     
         }
         onUnload() {
