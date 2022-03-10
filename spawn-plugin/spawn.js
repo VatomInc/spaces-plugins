@@ -8,12 +8,15 @@
  * @author zmaqutu
  */
 
-module.exports = class SpawnPlugin extends BasePlugin {
+ module.exports = class SpawnPlugin extends BasePlugin {
 
         /** Plugin info */
         static get id()             { return 'spawn-plugin' }
         static get name()           { return 'Spawn Plugin' }
         static get description()    { return 'Spawns a user\'s avatar on a random place in the world.' }
+
+        //list of all spawn discs in the world
+        spawnObjectIDs = []
     
         /** Called when the plugin is loaded */
         onLoad() {
@@ -21,21 +24,41 @@ module.exports = class SpawnPlugin extends BasePlugin {
                 this.menus.alert('Hello World!')
                 // Register component
                 this.objects.registerComponent(SpawnComponent, {
-                id: 'spawn',
-                name: 'Spawn Avatar',
-                description: 'Moves this object to a random position in the world.',
-            })
+                        id: 'spawn',
+                        name: 'Spawn Avatar',
+                        description: 'Moves this object to a random position in the world.',
+                })
+                
+                this.hooks.addHandler('user-died', this.spawnToRandomPosition)
     
         }
+
         onUnload() {
                         
                 this.menus.alert('Goodbye World!')
         
         }
-        onSettingsUpdated(field,) {
+
+        onSettingsUpdated(field, value) {
     
                 this.menus.alert('Settings updated!')
     
+        }
+
+        spawnToRandomPosition = async () => { 
+                console.log('spawn hook triggered')
+                //get random spawn disc
+                let randomObjectID = this.spawnObjectIDs[Math.floor(Math.random() * this.spawnObjectIDs.length)]
+                
+                // get position of random spawn disc
+                let objectProperties = this.objects.get(randomObjectID)
+
+                let xPosition = objectProperties.x
+                let yPosition = objectProperties.height
+                let zPosition = objectProperties.z
+
+                
+                //move user to said position
         }
     
 }
@@ -45,6 +68,9 @@ class SpawnComponent extends BaseComponent {
         onLoad() {
     
             console.log('Loaded component!')
+            console.log(this.objectID)
+            console.log(this.plugin)
+            this.plugin.spawnObjectIDs.push(this.objectID)
     
         }
     
@@ -53,13 +79,15 @@ class SpawnComponent extends BaseComponent {
     
             // Show alert
             this.plugin.menus.alert('Object clicked!')
+            console.log(this.plugin)
     
         }
 
         /** Called when your component is about to be removed */
         onUnload() {
                         
-                console.log('Unloaded component!')
+                /** Unload component and remove object ID from plugin */
+                this.plugin.spawnObjectIDs.filter(id => id !== this.objectID)
         
         }
 
