@@ -20,8 +20,6 @@
     
         /** Called when the plugin is loaded */
         onLoad() {
-    
-                this.menus.alert('Hello World!')
                 // Register component
                 this.objects.registerComponent(SpawnComponent, {
                         id: 'spawn',
@@ -41,24 +39,22 @@
 
         onSettingsUpdated(field, value) {
     
-                this.menus.alert('Settings updated!')
+                // this.menus.alert('Settings updated!')
     
         }
 
         spawnToRandomPosition = async () => { 
                 console.log('spawn hook triggered')
+                
                 //get random spawn disc
                 let randomObjectID = this.spawnObjectIDs[Math.floor(Math.random() * this.spawnObjectIDs.length)]
                 
                 // get position of random spawn disc
                 let objectProperties = this.objects.get(randomObjectID)
 
-                let xPosition = objectProperties.x
-                let yPosition = objectProperties.height
-                let zPosition = objectProperties.z
-
                 
                 //move user to said position
+                await this.plugin.user.setPosition(objectProperties.x, objectProperties.height, objectProperties.z) 
         }
     
 }
@@ -67,18 +63,15 @@ class SpawnComponent extends BaseComponent {
         /** Called when an object with this component is loaded */
         onLoad() {
     
-            console.log('Loaded component!')
-            console.log(this.objectID)
-            console.log(this.plugin)
+        //     console.log('Loaded component!')
+        //     console.log(this.objectID)
+        //     console.log(this.plugin)
             this.plugin.spawnObjectIDs.push(this.objectID)
     
         }
     
         /** Called when the user clicks on this object */
         onClick() {
-    
-            // Show alert
-            this.plugin.menus.alert('Object clicked!')
             console.log(this.plugin)
     
         }
