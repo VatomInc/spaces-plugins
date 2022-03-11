@@ -1,7 +1,7 @@
 /**
  * Spawn Plugin
  *
- * Spawns a user's avatar on a random place in the world.
+ * Spawns a user's avatar on a random place in the space.
  * Listens for a hook called 'spawn' and moves the user's avatar to a random position .
  *
  * @license MIT
@@ -13,9 +13,9 @@
         /** Plugin info */
         static get id()             { return 'spawn-plugin' }
         static get name()           { return 'Spawn Plugin' }
-        static get description()    { return 'Spawns a user\'s avatar on a random place in the world.' }
+        static get description()    { return 'Spawns a user\'s avatar on a random place in the space.' }
 
-        //list of all spawn discs in the world
+        //list of all spawn discs in the space
         spawnObjectIDs = []
     
         /** Called when the plugin is loaded */
@@ -24,7 +24,7 @@
                 this.objects.registerComponent(SpawnComponent, {
                         id: 'spawn',
                         name: 'Spawn Avatar',
-                        description: 'Moves this object to a random position in the world.',
+                        description: 'Moves this object to a random position in the space.',
                 })
                 
                 this.hooks.addHandler('fpshud.death', this.spawnToRandomPosition)
@@ -33,7 +33,7 @@
 
         onUnload() {
                         
-                this.menus.alert('Goodbye World!')
+                // this.menus.alert('Goodbye World!')
         
         }
 

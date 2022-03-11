@@ -10,8 +10,21 @@ module.exports = class TestSpawnPlugin extends BasePlugin {
         onLoad() {
     
         //     this.menus.alert('Hello World!')
-            this.hooks.trigger('fpshud.death')
+            this.menus.register({
+                id: 'zongo.spawn-test',
+                text: 'Test Spawn',
+                section: 'controls',
+                adminOnly: false,
+                order: 11,
+                icon: this.paths.absolute('./respawnTest.svg'),
+                action: this.onMenuPress.bind(this)
+            })
     
         }
+        onMenuPress() {
+            this.hooks.trigger('fpshud.death')
+                
+        }
+
     
 }
