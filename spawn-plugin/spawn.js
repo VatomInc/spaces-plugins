@@ -77,7 +77,9 @@ class SpawnComponent extends BaseComponent {
         onUnload() {
                         
                 /** Unload component and remove object ID from plugin */
-                this.plugin.spawnObjectIDs.filter(id => id !== this.objectID)
+                console.log('component removed')
+                this.plugin.spawnObjectIDs = this.plugin.spawnObjectIDs.filter(id => id !== this.objectID)
+                console.log(this.plugin.spawnObjectIDs)
         
         }
 
