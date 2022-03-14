@@ -5,7 +5,7 @@
  * Listens for a hook called 'spawn' and moves the user's avatar to a random position .
  *
  * @license MIT
- * @author zmaqutu
+ * @author Zongo Maqutu @zmaqutu
  */
 
  module.exports = class SpawnPlugin extends BasePlugin {
