@@ -6,7 +6,7 @@
  * @license MIT
  * @author Liron-Toledo
  */
-module.exports = class LandMinePlugin extends BasePlugin {
+ module.exports = class LandMinePlugin extends BasePlugin {
 
     /** Plugin info */
     static get id()             { return 'land-mine-plugin' }
@@ -25,6 +25,7 @@ module.exports = class LandMinePlugin extends BasePlugin {
                 { id: 'respawn-time', name: 'Respawn Time', type: 'number', default: 5, help: 'How long, in seconds, it takes for land mine to respawn' },
                 { id: 'explosion-power-min', name: 'Explosion Power Min', type: 'number', default: 5, help: 'Minimum height, in metres, that the avatar is flung in the air when triggering the land mine' },
                 { id: 'explosion-power-max', name: 'Explosion Power Max', type: 'number', default: 15, help: 'Maximum height, in metres, that the avatar is flung in the air when triggering the land mine' },
+                { id: 'sound-effect-volume', name: 'Sound Effect Volume', type: 'number', default: 0.5, help: 'Volume of the attached sound effect, with a value of 1 being full volume and 0 being silent' },
                 { id: 'points-removed', name: 'Points Removed', type: 'number', default: 10, help: 'How many points are removed when triggering the mine' }
             ]
         })
@@ -96,9 +97,8 @@ class LandMine extends BaseComponent {
         this.sendMessage({ action:'triggerMine', id: this.instanceID, position: await this.plugin.user.getPosition(), objectID: this.objectID }, true)
 
         // Play sound
-        this.plugin.audio.play(this.paths.absolute('./ExplosionSound.mp3'))
-
-        // TODO: Play Visual Effect
+        let volume = Math.min(Math.max((parseFloat(this.getField('sound-effect-volume')) || 0.5), 0), 1); 
+        this.plugin.audio.play(this.paths.absolute('./ExplosionSound.mp3'), {volume: volume})
 
         const min = parseFloat(this.getField('explosion-power-min')) || 5
         const max = parseFloat(this.getField('explosion-power-max')) || 15
