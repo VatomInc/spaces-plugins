@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid'
  * Demonstrates how webpack can be used when developing external plugins.
  *
  * All information regarding plugin development can be found at
- * https://dev.spatialweb.net/plugins/plugins/
+ * https://developer.vatom.com/plugins/plugins/
  *
  * @license MIT
  * @author Vatom Inc.

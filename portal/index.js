@@ -4,7 +4,7 @@
  * Allows users to teleport to different areas (within a space) using a portal.
  *
  * All information regarding plugin development can be found at
- * https://dev.spatialweb.net/plugins/plugins/
+ * https://developer.vatom.com/plugins/plugins/
  *
  * @license MIT
  * @author Vatom Inc.

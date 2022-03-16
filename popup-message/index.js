@@ -4,7 +4,7 @@
  * Displays a message, in a popup, to a user when they enter a space.
  *
  * All information regarding plugin development can be found at
- * https://dev.spatialweb.net/plugins/plugins/
+ * https://developer.vatom.com/plugins/plugins/
  *
  * @license MIT
  * @author Vatom Inc.

@@ -1,10 +1,7 @@
 /**
  * Iframe Alert
- * 
+ *
  * Displays a custom UI within the space.
- * 
- * All information regarding plugin development can be found at
- * https://dev.spatialweb.net/plugins/plugins/
  *
  * @license MIT
  * @author jjv360

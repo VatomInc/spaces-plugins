@@ -4,7 +4,7 @@
  * A game where users can walk over coins to collect them.
  *
  * All information regarding plugin development can be found at
- * https://dev.spatialweb.net/plugins/plugins/
+ * https://developer.vatom.com/plugins/plugins/
  *
  * @license MIT
  * @author Vatom Inc.

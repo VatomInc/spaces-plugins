@@ -4,7 +4,7 @@
  * Allows objects in the space to have physics.
  *
  * All information regarding plugin development can be found at
- * https://dev.spatialweb.net/plugins/plugins/
+ * https://developer.vatom.com/plugins/plugins/
  *
  * @license MIT
  * @author Vatom Inc.
