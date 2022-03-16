@@ -49,7 +49,6 @@ module.exports = class FPSHUDPlugin extends BasePlugin {
 
         this.hooks.addHandler('fpshud.health.change', this.onHealthChange)
         this.hooks.addHandler('fpshud.armor.change', this.onArmorChange)
-        console.log('%cStats:', 'background-color: goldenrod; color: black;', `health=${this.health} armor=${this.armor}`)
     }
 
     /** Called when a message has been received */
