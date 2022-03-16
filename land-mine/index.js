@@ -6,7 +6,13 @@
  * @license MIT
  * @author Liron-Toledo
  */
- module.exports = class LandMinePlugin extends BasePlugin {
+
+/** Clamps a value between a minimum and maximum */
+function clamp(value, min, max) {
+    return Math.max(min, Math.min(value, max))
+}
+
+module.exports = class LandMinePlugin extends BasePlugin {
 
     /** Plugin info */
     static get id()             { return 'land-mine-plugin' }
@@ -36,11 +42,14 @@
 
 class LandMine extends BaseComponent {
 
+    /** Explosion sound */
+    explosionSound = this.paths.absolute('./ExplosionSound.mp3')
+
     /** Called when the component is loaded */
     onLoad() {
         this.instanceID = Math.random().toString(36).substr(2)
 
-        this.plugin.audio.preload(this.paths.absolute('./ExplosionSound.mp3'))
+        this.plugin.audio.preload(this.explosionSound)
         this.timer = setInterval(this.onTimer.bind(this), 200)
     }
 
@@ -51,7 +60,7 @@ class LandMine extends BaseComponent {
         }
 
         if (e.action == 'triggerMine') {
-            this.plugin.audio.play(this.paths.absolute('ExplosionSound.mp3'), { x: e.position.x, y: e.position.z, height: e.position.y, radius: 40 })
+            this.plugin.audio.play(this.explosionSound, { x: e.position.x, y: e.position.z, height: e.position.y, radius: 40 })
             this.plugin.objects.update(e.objectID, { hidden: true }, true)
 
             // Respawn mine after a delay
@@ -97,8 +106,8 @@ class LandMine extends BaseComponent {
         this.sendMessage({ action:'triggerMine', id: this.instanceID, position: await this.plugin.user.getPosition(), objectID: this.objectID }, true)
 
         // Play sound
-        let volume = Math.min(Math.max((parseFloat(this.getField('sound-effect-volume')) || 0.5), 0), 1); 
-        this.plugin.audio.play(this.paths.absolute('./ExplosionSound.mp3'), {volume: volume})
+        let volume = clamp(parseFloat(this.getField('sound-effect-volume')) || 0.5, 0, 1)
+        this.plugin.audio.play(this.explosionSound, { volume: volume })
 
         const min = parseFloat(this.getField('explosion-power-min')) || 5
         const max = parseFloat(this.getField('explosion-power-max')) || 15
