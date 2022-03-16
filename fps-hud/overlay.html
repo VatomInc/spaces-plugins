@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;300;400;600;700&display=swap" rel="stylesheet">
+
+  <title>Overlay</title>
+</head>
+
+<body style="font-family: 'Roboto Mono', monospace;">
+
+  <!-- Respawn screen -->
+  <div id="death-screen" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(149, 45, 45, 0.75); pointer-events: initial;">
+    <div style="display: flex; flex-direction: column; padding-top: 15%; width: 100%; height: 100%; align-items: center; box-sizing: border-box;">
+      <!-- Death image -->
+      <img id="skull-img" style="width: 180px; height: 180px;" />
+
+      <!-- Game over text -->
+      <div style="color: #FF0000; font-size: 72px; font-weight: bold; margin: 15px 0 10px 0;">
+        GAME OVER
+      </div>
+      <div style="color: #AAAAAA; font-size: 26px;">
+        You were killed
+      </div>
+    </div>
+  </div>
+
+  <!-- Health bar -->
+  <div style="display: flex; position: absolute; top: 20px; left: 20px; align-items: center;">
+    <img id="health-img" style="width: 42px; height: 42px; margin-right: 10px;" />
+
+    <div style="width: 150px; height: 26px; padding: 3px; border-radius: 8px; background-color: rgba(255, 255, 255, 0.15);">
+      <div id="health-bar" style="width: 100%; height: 100%; border-radius: inherit; background-color: #2dca8c; box-sizing: border-box; transition: width 0.25s;"></div>
+    </div>
+  </div>
+
+  <!-- Armor bar -->
+  <div style="display: flex; position: absolute; top: 58px; left: 20px; align-items: center;">
+    <img id="armor-img" style="width: 40px; height: 40px; margin: 0 10px 0 2px;" />
+
+    <div style="width: 50px; height: 26px; padding: 3px; border-radius: 8px; background-color: rgba(255, 255, 255, 0.15);">
+      <div id="armor-bar" style="width: 100%; height: 100%; border-radius: inherit; background-color: #0074cc; box-sizing: border-box; transition: width 0.25s;"></div>
+    </div>
+  </div>
+
+  <!-- Code -->
+  <script lang="js">
+
+    // Called when a message is received from the plugin
+    window.addEventListener('message', function (e) {
+      // Show skull logo
+      if (e.data.action === 'show-skull') {
+        document.getElementById('skull-img').src = e.data.src
+      }
+
+      // Show image next to health bar
+      if (e.data.action === 'show-health') {
+        document.getElementById('health-img').src = e.data.src
+      }
+
+      // Show image next to armor bar
+      if (e.data.action === 'show-armor') {
+        document.getElementById('armor-img').src = e.data.src
+      }
+
+      // Set health amount
+      if (e.data.action === 'set-health') {
+        document.getElementById('health-bar').style.width = `${e.data.health / e.data.max * 100}%`
+      }
+
+      // Set armor amount
+      if (e.data.action === 'set-armor') {
+        document.getElementById('armor-bar').style.width = `${e.data.armor / e.data.max * 100}%`
+      }
+
+      // Update display for death screen
+      if (e.data.action === 'set-death-display') {
+        document.getElementById('death-screen').style.display = e.data.display
+      }
+    })
+
+    // Tell plugin to send us info
+    parent.postMessage({ action: 'overlay-load' }, '*')
+
+  </script>
+
+</body>
+</html>
