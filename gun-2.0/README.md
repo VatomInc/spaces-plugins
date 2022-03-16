@@ -6,7 +6,7 @@ This plugin allows users to shoot a projectile from a gun.
 
 - **Step 1:** Upload the crosshair.png image and add a link to the uploaded URL to the image source
   in the bulletCount.html (line 18)
-- **Step 2:** Host the plugin on a [CORS enabled](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) server, or upload the entire `gun` directory into your own space
+- **Step 2:** Host the plugin on a [CORS enabled](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) server, or upload the entire `gun-2.0` directory into your own space
   - If you are hosting the plugin on a server, you need to copy the full URL to the `index.js` file
   - To host the plugin in your own space, you can go to File -> Storage and click the top-right "upload" button
   - Once it has been uploaded, click on the `index.js` file and select "Copy URL"
