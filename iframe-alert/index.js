@@ -1,16 +1,18 @@
 /**
- * iframe alert
+ * Iframe Alert
+ * 
+ * Displays a custom UI within the space.
  * 
  * All information regarding plugin development can be found at
  * https://dev.spatialweb.net/plugins/plugins/
  *
  * @license MIT
- * @author Vatom Inc.
+ * @author jjv360
  */
- module.exports = class IframeAlert extends BasePlugin {
+module.exports = class IframeAlert extends BasePlugin {
 
     /** Plugin info */
-    static get id()             { return 'iframe-alert-test' }
+    static get id()             { return 'iframe-alert' }
     static get name()           { return 'Custom UI Popup' }
     static get description()    { return 'Tests the ability to display custom UI within the app.' }
 
