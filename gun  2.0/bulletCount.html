@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+    <title>Bullet Count</title>
+</head>
+<body>
+
+    <!-- Bullet cointer -->
+    <div style="text-align: right;">
+        <div id='bullets' style="display: inline-block; font-size: 28px; -webkit-text-stroke: white 1px; position: absolute; top: 50px; right: 20px;">30</div>
+    </div>
+
+    <!-- Crosshair -->
+    <div text-align="center">
+        <img src="https://firebasestorage.googleapis.com/v0/b/ydangle-high-fidelity-test-2.appspot.com/o/server%2FisLSLbuFIC%2FGunPlugin%2Fcrosshair.png?alt=media&token=907fe291-20cb-407e-92bb-9295e0fa6f14" id="crosshair-img" width="40" height="40" style="position:absolute; top:0; left:0; right:0; bottom:0; margin:auto;"/>
+    </div>
+
+    <!-- Code -->
+    <script>
+
+        // Called when a message is received from the plugin
+        window.addEventListener('message', function (e) {
+
+            // Show bullet change
+            if (e.data.action === 'set-bullets') {
+                document.getElementById('bullets').innerText = e.data.bullets
+            }
+
+            // Update image used for crosshair
+            if (e.data.action === 'update-crosshair-img') {
+                document.getElementById('crosshair-img').src = e.data.src
+            }
+
+        })
+
+        // On load, ask the plugin to send us all messages
+        parent.postMessage({ action: 'panel-load' }, '*')
+
+    </script>
+</body>
+</html>
