@@ -1,11 +1,11 @@
 <div>
   <h1 align="center">
-    <img src="./logo.svg" alt="Logo" height="38"></img>
+    <img src="./logo.svg" alt="Logo" style="position: relative; width: 35px; height: 35px; bottom: -6px;"></img>
     Spaces Example Plugins
   </h1>
 </div>
 
-Examples of plugins that can be imported into your own <a href="https://spaces.vatom.com"><img src="./logo.svg" alt="Logo" height="14"></img> Space</a> 
+Examples of plugins that can be imported into your own <a href="https://spaces.vatom.com"><img src="./logo.svg" style="position: relative; width: 13px; height: 13px; bottom: -2px;" /> Space</a> 
 
 If you would like to know more about developing your own plugins, you can visit
 the "[Creating Plugins](https://developer.vatom.com/plugins/plugins/)"
