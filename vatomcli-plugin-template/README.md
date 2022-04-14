@@ -1,4 +1,4 @@
-# My Spaces Plugin 🔌
+# VATOM_TEMPLATE_PLUGIN_NAME 🔌
 
 This plugin is designed to be used from within [Vatom Spaces](https://vatom.com).
 
