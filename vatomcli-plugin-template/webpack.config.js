@@ -52,3 +52,18 @@ module.exports.plugins.push(new CopyPlugin({
         { from: path.resolve(__dirname, 'resources'), to: "./" },
     ],
 }))
+
+// Add support for the dev server
+module.exports.devServer = {
+    static: {
+        directory: path.join(__dirname, 'resources'),
+    },
+    compress: true,
+    port: 9000,
+    hot: false,
+    headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, OPTIONS",
+        "Access-Control-Allow-Headers": "X-Requested-With, Content-Type, Authorization"
+    }
+}

@@ -8,13 +8,12 @@ This plugin is designed to be used from within [Vatom Spaces](https://vatom.com)
 - Install dependencies: `npm install`
 - Build the plugin: `npm run build`
 
-
 ## Developing locally
-- Run the build: `npm run build`
-- Upload all files in the dist/ folder by going to File > Storage within your space
-- In the Storage dialog, click the plugin.js file and then Copy URL
-- Go to Plugins and select Add from URL, and then paste the copied URL in.
+- Start the dev server: `npm start`
+- Load the plugin in your space. Select Plugins, press the (+) icon and then paste the address: [http://localhost:9000/plugin.js](http://localhost:9000/plugin.js)
+- After making code changes, refresh the page
 
+> **Note:** You can only sideload plugins in a space you are the owner of.
 
 ## Publishing the plugin
 - Run: `npm run publish`
