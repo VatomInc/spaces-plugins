@@ -1,0 +1,14 @@
+{
+  "id": "vatominc-spotify",
+  "name": "Spotify Playlist",
+  "version": "1.0.0",
+  "beta": true,
+  "description": "Allows you to open a spotify playlist inside the space.",
+  "longDescription": "This plugin adds a spotify button to the bottom menu bar, so that you can listen to your own playlist inside your space.",
+  "configuration": "",
+  "category": "Fun",
+  "businessId": "<YOUR BUSINESS ID HERE>",
+  "price": 0,
+  "releaseNotes": " ",
+  "entrypoint": ""
+}

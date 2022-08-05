@@ -1,5 +1,5 @@
 {
-  "name": "vatominc-coin-pickup-game",
+  "name": "vatominc-physics",
   "version": "1.0.0",
   "description": "A plugin for Vatom Spaces.",
   "main": "src/index.js",

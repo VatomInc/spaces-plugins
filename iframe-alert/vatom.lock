@@ -1,0 +1,14 @@
+{
+  "id": "iframe-alert",
+  "name": "Custom UI Popup",
+  "version": "1.0.0",
+  "beta": true,
+  "description": "iframe Alert Description",
+  "longDescription": "Tests the ability to display custom UI within the app.",
+  "configuration": "",
+  "category": "Fun",
+  "businessId": "<YOUR BUSINESS ID HERE>",
+  "price": 0,
+  "releaseNotes": " ",
+  "entrypoint": ""
+}

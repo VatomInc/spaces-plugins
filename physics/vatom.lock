@@ -1,0 +1,14 @@
+{
+  "id": "vatominc-physics",
+  "name": "Physics",
+  "version": "1.0.0",
+  "beta": true,
+  "description": "Allows objects in the space to have physics.",
+  "longDescription": "This plugin allows objects in the space to have physics, so they can be moved around by, and collide with, users.",
+  "configuration": "",
+  "category": "Fun",
+  "businessId": "<YOUR BUSINESS ID HERE>",
+  "price": 0,
+  "releaseNotes": " ",
+  "entrypoint": ""
+}

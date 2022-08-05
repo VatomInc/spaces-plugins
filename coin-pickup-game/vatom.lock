@@ -1,9 +1,9 @@
 {
-  "id": "coinpickupgame",
-  "name": "Coin Pick Up Game Plugin",
+  "id": "vatominc-coin-pickup-game",
+  "name": "Coin Pickup Game",
   "version": "1.0.0",
   "beta": true,
-  "description": "Coin Pick Up Game Description",
+  "description": "A game where users can walk over coins to collect them.",
   "longDescription": "This plugin adds a game-like element to the SpatialWeb. It automatically drops "coins" which can then be collected by users by walking over it. Each coin simply increases an overall score counter.",
   "configuration": "",
   "category": "Fun",

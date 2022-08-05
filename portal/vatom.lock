@@ -1,0 +1,14 @@
+{
+  "id": "vatominc-portals",
+  "name": "Portals",
+  "version": "1.0.0",
+  "beta": true,
+  "description": "Allow users to teleport to different areas within the space.",
+  "longDescription": "This plugin allows users to teleport to different areas (within a space) using a portal.",
+  "configuration": "",
+  "category": "Fun",
+  "businessId": "<YOUR BUSINESS ID HERE>",
+  "price": 0,
+  "releaseNotes": " ",
+  "entrypoint": ""
+}
