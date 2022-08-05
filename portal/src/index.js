@@ -9,12 +9,12 @@
  * @license MIT
  * @author Vatom Inc.
  */
-module.exports = class PortalPlugin extends BasePlugin {
+export default class PortalPlugin extends BasePlugin {
 
     /** Plugin info */
-    static get id()             { return 'vatominc-portals' }
-    static get name()           { return 'Portals' }
-    static get description()    { return 'Allow users to teleport to different areas within the space.' }
+    static id = "vatominc-portals"
+    static name = "Portals"
+    static description = "Allow users to teleport to different areas within the space."
 
     /** All loaded portals */
     portals = []

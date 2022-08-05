@@ -6,12 +6,12 @@
  * @license MIT
  * @author jjv360
  */
-module.exports = class SystemAlertPlugin extends BasePlugin {
+export default class SystemAlertPlugin extends BasePlugin {
 
     /** Plugin info */
-    static get id()             { return 'jjv360.system-alert' }
-    static get name()           { return 'System Alert' }
-    static get description()    { return 'Display a message, in a toast, to all users in the space.' }
+    static id = "jjv360.system-alert"
+    static name = "System Alert"
+    static description = "Display a message, in a toast, to all users in the space."
 
     /** Called when the plugin is loaded */
     async onLoad() {

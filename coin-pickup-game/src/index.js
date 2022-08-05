@@ -23,12 +23,12 @@ const Themes = [
     }
 ]
 
-module.exports = class CoinPickupGame extends BasePlugin {
+export default class CoinPickupGame extends BasePlugin {
 
     /** Plugin info */
-    static get id()             { return 'vatominc-coin-pickup-game' }
-    static get name()           { return 'Coin Pickup Game' }
-    static get description()    { return 'A game where users can walk over coins to collect them.' }
+    static id = "vatominc-coin-pickup-game"
+    static name = "Coin Pickup Game"
+    static description = "A game where users can walk over coins to collect them."
 
     /** Current number of coins collected */
     score = 0

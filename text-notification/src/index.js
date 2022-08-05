@@ -6,12 +6,12 @@
  * @license MIT
  * @author zmaqutu
  */
-module.exports = class TextNotificationPlugin extends BasePlugin {
+export default class TextNotificationPlugin extends BasePlugin {
 
     /** Plugin info */
-    static get id()             { return 'zongo.text-notify' }
-    static get name()           { return 'Text Notification' }
-    static get description()    { return 'Notifies space hosts via text when a new user arrives in their space.' }
+    static id = "zongo.text-notify"
+    static name = "Text Notification"
+    static description = "Notifies space hosts via text when a new user arrives in their space."
 
     phoneNumberMap = new Map()
     userName = ''

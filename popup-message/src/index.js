@@ -9,12 +9,12 @@
  * @license MIT
  * @author Vatom Inc.
  */
-module.exports = class PopupMessage extends BasePlugin {
+export default class PopupMessage extends BasePlugin {
 
     /** Plugin info */
-    static get id()             { return 'vatominc-popup-message' }
-    static get name()           { return 'Popup Message' }
-    static get description()    { return 'Display a message, in a popup, to users when they enter the space.' }
+    static id = "vatominc-popup-message"
+    static name = "Popup Message"
+    static description = "Display a message, in a popup, to users when they enter the space."
 
     /** Called when the plugin is loaded */
     async onLoad() {

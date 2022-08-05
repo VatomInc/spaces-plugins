@@ -13,12 +13,12 @@
 /** Determines the interval of state transfer over the network, in milliseconds */
 const StateTransferInterval = 100
 
-module.exports = class Physics extends BasePlugin {
+export default class Physics extends BasePlugin {
 
     /** Plugin info */
-    static get id()             { return 'vatominc-physics' }
-    static get name()           { return 'Physics' }
-    static get description()    { return 'Allows objects in the space to have physics.' }
+    static id = "vatominc-physics"
+    static name = "Physics"
+    static description = "Allows objects in the space to have physics."
 
     /** Position of user in the x direction */
     userX = 0

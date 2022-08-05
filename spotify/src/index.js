@@ -10,12 +10,12 @@
  * @license MIT
  * @author Vatom Inc.
  */
-module.exports = class Spotify extends BasePlugin {
+export default class Spotify extends BasePlugin {
 
     /** Plugin info */
-    static get id()             { return 'vatominc-spotify' }
-    static get name()           { return 'Spotify Playlist' }
-    static get description()    { return 'Allows you to open a spotify playlist inside the space.' }
+    static id = "vatominc-spotify"
+    static name = "Spotify Playlist"
+    static description = "Allows you to open a spotify playlist inside the space."
 
     /** Called when the plugin is loaded */
     onLoad() {

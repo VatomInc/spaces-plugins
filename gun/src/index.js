@@ -6,12 +6,12 @@
  * @license MIT
  * @author FrancoBolevin
  */
-module.exports = class GunPlugin extends BasePlugin {
+export default class GunPlugin extends BasePlugin {
 
     /** Plugin info */
-    static get id()             { return 'gunplugin' }
-    static get name()           { return 'Gun shooting game' }
-    static get description()    { return 'A game where users can shoot a projectile from a gun.' }
+    static id = "gunplugin"
+    static name = "Gun shooting game"
+    static description = "A game where users can shoot a projectile from a gun."
 
     /** Called when the plugin is loaded */
     async onLoad() {
