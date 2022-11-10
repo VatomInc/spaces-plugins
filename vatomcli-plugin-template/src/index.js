@@ -19,7 +19,7 @@ export default class MyPlugin extends BasePlugin {
         // Create a button in the toolbar
         this.menus.register({
             icon: this.paths.absolute('button-icon.png'),
-            text: 'My Plugin',
+            text: 'VATOM_TEMPLATE_PLUGIN_NAME',
             action: () => this.onButtonPress()
         })
 
@@ -29,7 +29,7 @@ export default class MyPlugin extends BasePlugin {
     onButtonPress() {
 
         // Show alert
-        this.menus.alert(`Hello from ${MyPlugin.name} version ${require('../package.json').version}!`, 'Hello world!', 'info')
+        this.menus.alert(`Hello from ${this.constructor.name} version ${require('../package.json').version}!`, 'Hello world!', 'info')
 
     }
 

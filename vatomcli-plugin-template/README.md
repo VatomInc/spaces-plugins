@@ -3,17 +3,12 @@
 This plugin is designed to be used from within [Vatom Spaces](https://vatom.com).
 
 
-## Building the plugin
-- Ensure you have [Node.js](https://nodejs.org) installed.
-- Install dependencies: `npm install`
-- Build the plugin: `npm run build`
+## Development
 
-## Developing locally
-- Start the dev server: `npm start`
-- Load the plugin in your space. Select Plugins, press the (+) icon and then paste the address: [http://localhost:9000/plugin.js](http://localhost:9000/plugin.js)
-- After making code changes, refresh the page
+- Ensure you have [Node](https://nodejs.org) installed
+- Install dependencies with `npm install`
+- Login to the Vatom CLI with `npm run login`
+- Build and load the plugin into your space with `npm run sideload -- myspace` (replace `myspace` with your space alias name)
+- When ready, publish to the Marketplace with `npm run publish`
 
 > **Note:** You can only sideload plugins in a space you are the owner of.
-
-## Publishing the plugin
-- Run: `npm run publish`

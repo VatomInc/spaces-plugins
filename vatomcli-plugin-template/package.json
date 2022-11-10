@@ -6,6 +6,8 @@
   "scripts": {
     "build": "webpack",
     "publish": "npx -p @vatom/cli vatom plugin publish",
+    "login": "npx -p @vatom/cli vatom auth",
+    "sideload": "npm run build && npx -p @vatom/cli vatom plugin sideload",
     "start": "webpack serve"
   },
   "devDependencies": {
