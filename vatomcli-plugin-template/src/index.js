@@ -1,3 +1,5 @@
+import BasePlugin from 'base-plugin-declaration'
+
 /**
  * This is the main entry point for your plugin.
  *
