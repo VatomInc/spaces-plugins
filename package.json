@@ -23,6 +23,6 @@
   },
   "homepage": "https://github.com/VatomInc/sw-plugins#readme",
   "dependencies": {
-    "vatom-spaces-external-plugin-declarations": "^1.0.2"
+    "vatom-spaces-plugins": "^1.0.1"
   }
 }

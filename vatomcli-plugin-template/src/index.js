@@ -1,4 +1,7 @@
-import BasePlugin from 'base-plugin-declaration'
+import { BasePlugin } from 'vatom-spaces-plugins'
+import { BaseComponent } from 'vatom-spaces-plugins'
+
+BasePlugin
 
 /**
  * This is the main entry point for your plugin.
