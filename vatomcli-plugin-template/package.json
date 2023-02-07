@@ -1,5 +1,5 @@
 {
-  "name": "VATOM_TEMPLATE_PLUGIN_PKGNAME",
+  "name": "vatom-template-plugin",
   "version": "1.0.0",
   "description": "A plugin for Vatom Spaces.",
   "main": "src/index.js",
@@ -19,5 +19,8 @@
     "url-loader": "^4.1.1",
     "webpack": "^5.72.0",
     "webpack-cli": "^4.9.2"
+  },
+  "dependencies": {
+    "vatom-spaces-plugins": "^1.0.1"
   }
 }

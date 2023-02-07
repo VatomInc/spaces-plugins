@@ -12,8 +12,8 @@ import { BasePlugin, BaseComponent } from 'vatom-spaces-plugins'
 export default class MyPlugin extends BasePlugin {
 
     /** Plugin info */
-    static id = "VATOM_TEMPLATE_PLUGIN_ID"
-    static name = "VATOM_TEMPLATE_PLUGIN_NAME"
+    static id = "vatom-template-plugin"
+    static name = "Vatom Template Plugin"
 
     /** Called on load */
     onLoad() {
@@ -21,7 +21,7 @@ export default class MyPlugin extends BasePlugin {
         // Create a button in the toolbar
         this.menus.register({
             icon: this.paths.absolute('button-icon.png'),
-            text: 'VATOM_TEMPLATE_PLUGIN_NAME',
+            text: 'Plugin',
             action: () => this.onButtonPress()
         })
 

@@ -1,7 +1,6 @@
-# VATOM_TEMPLATE_PLUGIN_NAME 🔌
+# Vatom Template Plugin 🔌
 
 This plugin is designed to be used from within [Vatom Spaces](https://vatom.com).
-
 
 ## Development
 
