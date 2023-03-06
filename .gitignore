@@ -129,3 +129,6 @@ dist
 
 # SvelteKit build / generate output
 .svelte-kit
+
+# Intellij
+/.idea/

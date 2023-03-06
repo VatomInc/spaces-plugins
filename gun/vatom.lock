@@ -1,0 +1,16 @@
+{
+  "id": "gunplugin",
+  "name": "Gun shooting game",
+  "version": "1.0.0",
+  "beta": true,
+  "description": "A game where users can shoot a projectile from a gun.",
+  "longDescription": "This plugin allows users to shoot a projectile from a gun.
+
+",
+  "configuration": "",
+  "category": "Fun",
+  "businessId": "<YOUR BUSINESS ID HERE>",
+  "price": 0,
+  "releaseNotes": " ",
+  "entrypoint": ""
+}

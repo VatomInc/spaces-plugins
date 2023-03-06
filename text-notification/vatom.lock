@@ -1,0 +1,14 @@
+{
+  "id": "zongo.text-notify",
+  "name": "Text Notification",
+  "version": "1.0.0",
+  "beta": true,
+  "description": "Notifies space hosts via text when a new user arrives in their space.",
+  "longDescription": "This plugin allows users to notify space hosts of their arrival to the space via SMS",
+  "configuration": "",
+  "category": "Fun",
+  "businessId": "<YOUR BUSINESS ID HERE>",
+  "price": 0,
+  "releaseNotes": " ",
+  "entrypoint": ""
+}

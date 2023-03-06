@@ -1,0 +1,14 @@
+{
+  "id": "vatominc-popup-message",
+  "name": "Popup Message",
+  "version": "1.0.0",
+  "beta": true,
+  "description": "Display a message, in a popup, to users when they enter the space.",
+  "longDescription": "This plugin displays a message, in a popup, to a user when they enter a space.",
+  "configuration": "",
+  "category": "Fun",
+  "businessId": "<YOUR BUSINESS ID HERE>",
+  "price": 0,
+  "releaseNotes": " ",
+  "entrypoint": ""
+}

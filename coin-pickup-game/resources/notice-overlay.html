@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+    <title>Notice</title>
+</head>
+<body>
+    <!-- Styling -->
+    <style>
+        div {
+            color: #FA0;
+            font-family: 'Press Start 2P', cursive;
+        }
+    </style>
+
+    <!-- Coin cointer -->
+    <div style="text-align: right;" onclick="parent.postMessage({ action: 'coin-alert' }, '*')">
+        <img id='coin-img' style="width: 64px; height: 64px; margin: -17px; display: inline-block;" />
+        <div id='score' style="display: inline-block; font-size: 28px; -webkit-text-stroke: black 1px;">?</div>
+    </div>
+
+    <!-- Code -->
+    <script>
+
+        // Called when a message is received from the plugin
+        window.addEventListener('message', function (e) {
+
+            // Show score change
+            if (e.data.action === 'set-score') {
+                document.getElementById('score').innerText = e.data.score
+            }
+
+            // Update image used for coin
+            if (e.data.action === 'update-coin-img') {
+                document.getElementById('coin-img').src = e.data.src
+            }
+
+        })
+
+        // On load, ask the plugin to send us all messages
+        parent.postMessage({ action: 'panel-load' }, '*')
+
+    </script>
+</body>
+</html>

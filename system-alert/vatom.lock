@@ -1,0 +1,14 @@
+{
+  "id": "jjv360.system-alert",
+  "name": "System Alert",
+  "version": "1.0.0",
+  "beta": true,
+  "description": "Display a message, in a toast, to all users in the space.",
+  "longDescription": "This plugin allows an admin user to send a toast message to everyone in the space.",
+  "configuration": "",
+  "category": "Fun",
+  "businessId": "<YOUR BUSINESS ID HERE>",
+  "price": 0,
+  "releaseNotes": " ",
+  "entrypoint": ""
+}
