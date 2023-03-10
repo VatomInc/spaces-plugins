@@ -23,11 +23,11 @@ const Themes = [
     }
 ]
 
-module.exports = class CoinPickupGame extends BasePlugin {
+export default class CoinPickupGame extends BasePlugin {
 
     /** Plugin info */
-    static get id()             { return 'vatominc-coin-pickup-game' }
-    static get name()           { return 'Coin Pickup Game' }
+    static id = "objectpickupgame"
+    static name = "Object Pickup Game"
     static get description()    { return 'A game where users can walk over coins to collect them.' }
 
     /** Current number of coins collected */
@@ -57,14 +57,15 @@ module.exports = class CoinPickupGame extends BasePlugin {
                 { id: 'pickup-sound', name: 'Pickup Sound', type: 'file', help: 'Sound that plays when picking up a coin. Leave blank for the default.' },
                 { id: 'model', name: 'Coin Model', type: 'file', help: 'GLB model file of the coin. Leave blank for the default.' },
                 { id: 'model-own-animation', name: 'Use Model Animation', type: 'checkbox', help: 'When enabled, the coin model will not rotate, instead it will use the animation inside the GLB (if one exists). You can enable this even if you just want to disable rotation and have no animation at all.' },
+                { id: 'model-scale', name: 'Model size', type: 'number', default: 0.1, help: 'Scale of the object getting spawned. Default is 0.1.'},
                 { id: 'spawn-radius', name: 'Spawn Radius', type: 'number', default: 10, help: 'Distance around this object to start spawning coins. Default is 10 meters, minimum is 5 meters and maximum is 500 meters.' },
                 { id: 'max-coins', name: 'Maximum Coins', type: 'number', default: 10, help: 'Maximum number of coins to spawn within the radius. Default is 10 coins.' },
                 { id: 'spawn-rate', name: 'Spawn Rate', type: 'number', default: 15, help: 'Number of seconds between coin spawns. Minimum is 15 seconds.' },
                 { id: 'spawn-chance', name: 'Spawn Chance', type: 'number', default: 100, help: 'Percentage chance that a coin will spawn. Default is 100 percent, meaning that the coin will always spawn.' },
                 { id: 'spawn-amount', name: 'Spawn Amount', type: 'number', default: 1, help: 'Number of coins to spawn each cycle. Minimum is 1 coin per cycle. Each coin is affected by the "Spawn Chance" field.' },
                 { id: 'score', name: 'Score Value', type: 'number', default: 1, help: 'Amount to increase the score by when picked up. Default is 1.'},
-                { id: 'action-spawn-now', name: 'Spawn New Coin', type: 'button' },
-                { id: 'action-remove-all', name: 'Remove All Coins', type: 'button' }
+                { id: 'action-spawn-now', name: 'Spawn New Object', type: 'button' },
+                { id: 'action-remove-all', name: 'Remove All Objects', type: 'button' }
             ]
         })
 
@@ -171,9 +172,30 @@ module.exports = class CoinPickupGame extends BasePlugin {
 }
 
 /**
- * Component that spawns new coins.
- */
+* Component that spawns new coins.
+*/
 class CoinSpawner extends BaseComponent {
+
+    /** On Load */
+    onLoad() {
+
+        // Get spawn rate
+        let time = this.getField('spawn-rate') || 15
+        time = time * 1000
+
+        // Start a distance check timer
+        this.timer = setInterval(this.onTimer.bind(this), time)
+    }
+
+    /** Called when the component is unloaded */
+    onUnload() {
+
+        // Remove timer
+        if (this.timer) {
+            clearInterval(this.timer)
+        }
+
+    }
 
     /** Called when an action is performed */
     async onAction(action) {
@@ -196,7 +218,7 @@ class CoinSpawner extends BaseComponent {
     }
 
     /** Called to check if new coins need to be added */
-    async onServerTick() {
+    async onTimer() {
 
         // Stop if disabled
         if (!this.getField('enabled')) {
@@ -264,13 +286,14 @@ class CoinSpawner extends BaseComponent {
             height: this.fields.height || 0,
             url: this.getField('model') || this.paths.absolute('gold-pirate-coin.glb'),
             coin_spawner_id: this.objectID,
+            scale: parseFloat(this.getField('model-scale')) || 0.1,
             rotation_speed: this.getField('model-own-animation') ? 0 : 2,
             do_not_clone: this.getField('model-own-animation') ? true : false,
             clientOnly: false,
-            ['component:' + this.plugin.id + ':coin:' + 'pickup-sound']: this.getField('pickup-sound') || this.paths.absolute('collect.wav'),
-            ['component:' + this.plugin.id + ':coin:' + 'score']: this.getField('score') || '',
+            ['component:' + this.plugin.id + ':vatominc-coin:' + 'pickup-sound']: this.getField('pickup-sound') || this.paths.absolute("collect.wav"),
+            ['component:' + this.plugin.id + ':vatominc-coin:' + 'score']: this.getField('score') || '',
             components: [
-                { id: this.plugin.id + ':coin' }
+                { id: this.plugin.id + ':vatominc-coin' }
             ]
         }
 
@@ -294,8 +317,8 @@ class CoinSpawner extends BaseComponent {
 }
 
 /**
- * Component that allows an object to be a coin.
- */
+* Component that allows an object to be a coin.
+*/
 class Coin extends BaseComponent {
 
     /** Timer used when claiming a coin */
@@ -311,7 +334,7 @@ class Coin extends BaseComponent {
         activeCoins.push(this)
 
         // Preload sound
-        const pickupSound = this.getField('pickup-sound')
+        const pickupSound = this.getField('pickup-sound') || this.paths.absolute("collect.wav")
         if (pickupSound) {
             this.plugin.audio.preload(pickupSound)
         }
@@ -358,7 +381,7 @@ class Coin extends BaseComponent {
             this.plugin.objects.update(this.objectID, { hidden: true }, true)
 
             // Play sound
-            const pickupSound = this.getField('pickup-sound')
+            const pickupSound = this.getField('pickup-sound') || this.paths.absolute("collect.wav")
             if (pickupSound) {
                 this.plugin.audio.play(pickupSound, { x: this.fields.x || 0, y: this.fields.y || 0, height: this.fields.height || 0, radius: 10 })
             }
@@ -400,7 +423,6 @@ class Coin extends BaseComponent {
 
     /** Called on a regular basis to check if user can pick up coin */
     onTimer(userPos) {
-
         const x = this.fields.x       || 0
         const y = this.fields.height  || 0
         const z = this.fields.y       || 0
@@ -414,7 +436,7 @@ class Coin extends BaseComponent {
             return
         }
 
-        // If last pickup failed, wait until the user leaves and comes back
+        //If last pickup failed, wait until the user leaves and comes back
         if (this.lastPickupFailed) {
             return
         }
@@ -427,7 +449,7 @@ class Coin extends BaseComponent {
         this.hasPickedUp = true
 
         // Play sound
-        const pickupSound = this.getField('pickup-sound')
+        const pickupSound = this.getField('pickup-sound') || this.paths.absolute("collect.wav")
         if (pickupSound) {
             this.plugin.audio.play(pickupSound)
         }
@@ -503,7 +525,10 @@ class Coin extends BaseComponent {
         }
 
         // Remove coin from server
-        await this.performServerAction('remove-coin')
+        if (await this.plugin.user.isAdmin())
+            this.plugin.objects.remove(this.objectID)
+        else
+            await this.performServerAction('remove-coin')
 
     }
 
