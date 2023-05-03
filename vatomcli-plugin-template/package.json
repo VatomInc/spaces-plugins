@@ -21,6 +21,6 @@
     "webpack-cli": "^4.9.2"
   },
   "dependencies": {
-    "vatom-spaces-plugins": "^1.1.5"
+    "vatom-spaces-plugins": "^1.1.6"
   }
 }
